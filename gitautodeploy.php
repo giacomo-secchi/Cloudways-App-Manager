@@ -1,5 +1,18 @@
 <?php
-require_once __DIR__ . '/../private_html/config.php';
+$configFile = __DIR__ . '/../private_html/config.php';
+
+if (!file_exists($configFile)) {
+    http_response_code(500);
+    header('Content-Type: application/json');
+    echo json_encode([
+        'error' => 'Configuration config.php file not found',
+    ]);
+    exit;
+}
+
+require_once $configFile;
+
+
 
 /* examples
 const BranchName = "master";
